@@ -1,0 +1,14 @@
+.link{
+color: white;
+
+}
+
+.link:hover{
+    color:rgb(229, 255, 0);
+}
+
+.divtag{
+    background-color:darkblue;
+    color:blanchedalmond
+  
+  }
