@@ -22,16 +22,39 @@ catch(err){
 //Q4: Generate Leads
 router.post("")
 
-//Q3: Get Leads->service getting data based on the city name
 router.get("/getleads",async(req,res) =>{
     try{
-    let storedUsers =await User.find((t)=>t.location==req.body.location);
+    let storedUsers =await User.find();
     
-        res.json(storedUsers)
+    res.json(storedUsers)
+    }catch(error)
+    {
+        res.send(error)
+    }
+    })
+
+//Q3: Get Leads->service getting data based on the city name
+router.get("/getleads/:location",async(req,res) =>{
+    try{
+    let storedUsers =await User.find();
+        const newarr = storedUsers.filter(item=>{
+           return item.location == req.params.location
+        })
+        res.json(newarr)
     }catch(error)
         {
             res.send(error)
         }
     })
 
+    router.get('/generateleads', function(req, res, next) {
+        request({
+          uri: 'https://api.github.com/search/users',
+        //   qs: {
+        //     location: 'toronto',
+        //     per_page: '5'
+        //   }
+        }).pipe(res);
+        console.log(res);
+      });
 module.exports = router;
